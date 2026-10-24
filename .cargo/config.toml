@@ -1,0 +1,5 @@
+[build]
+rustflags = [
+    "--remap-path-prefix", "C:\\Users\\User=~",
+    "--remap-path-prefix", "C:\\Antigravity=/src",
+]

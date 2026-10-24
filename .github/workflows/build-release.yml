@@ -1,0 +1,48 @@
+name: Build and Release QuickMD
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build Windows x64 Binary & MSI
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Install Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-pc-windows-msvc
+
+      - name: Build Rust Binary (Release)
+        run: cargo build --release
+
+      - name: Setup WiX Toolset
+        run: |
+          dotnet tool install --global wix --version 3.14.0 || choco install wixtoolset -y
+
+      - name: Build MSI Installer
+        shell: cmd
+        run: |
+          candle.exe -nologo -arch x64 -out installer\quickmd.wixobj installer\quickmd.wxs
+          light.exe -nologo -ext WixUIExtension -sval -out installer\QuickMD-2.0.0-windows-x64.msi installer\quickmd.wixobj
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            target/release/QuickMD.exe
+            installer/QuickMD-2.0.0-windows-x64.msi
+          draft: false
+          prerelease: false
+          generate_release_notes: true

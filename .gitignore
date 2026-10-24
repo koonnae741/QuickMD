@@ -1,0 +1,26 @@
+# Rust build artifacts
+/target/
+**/*.rs.bk
+*.pdb
+
+# Local Backups & temporary files
+backup_*/
+*.bak
+*.tmp
+extracted/
+installer/extracted/
+
+# WiX intermediate build objects
+installer/*.wixobj
+installer/*.wixpdb
+
+# IDE & Editor settings
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Operating System Files
+Thumbs.db
+.DS_Store
+desktop.ini

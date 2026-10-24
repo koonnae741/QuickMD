@@ -1,0 +1,26 @@
+[package]
+name = "quickmd"
+version = "2.0.0"
+edition = "2024"
+authors = ["Antigravity : Gemini 3.8 Flash", "YoRHa2N"]
+description = "Made by Antigravity : Gemini 3.8 Flash and YoRHa2N"
+
+[[bin]]
+name = "QuickMD"
+path = "src/main.rs"
+
+[dependencies]
+tao = "0.37.1"
+wry = "0.57.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+winreg = "0.56.0"
+rfd = "0.17.2"
+arboard = "3.6.1"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

@@ -1,0 +1,27 @@
+/* Typography & Font Definition for QuickMD */
+@charset "UTF-8";
+
+/* High-Legibility Modern Sans-Serif Font Stack for English & Thai */
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "IBM Plex Sans Thai", "Noto Sans Thai", "Sarabun", "Leelawadee UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "Cascadia Code", "Fira Code", "Consolas", "Courier New", monospace;
+  --font-math: "KaTeX_Main", "Times New Roman", serif;
+  
+  /* Thai Reading Optimizations */
+  --line-height-body: 1.82;
+  --line-height-heading: 1.35;
+  --letter-spacing-body: 0.012em;
+  --paragraph-spacing: 1.25em;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+code, kbd, samp, pre {
+  font-family: var(--font-mono);
+  font-feature-settings: "liga" 1, "calt" 1;
+}

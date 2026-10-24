@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" 
+           Name="QuickMD" 
+           Language="1033" 
+           Version="2.0.0" 
+           Manufacturer="YoRHa2N" 
+           UpgradeCode="4C7A5832-849F-491F-B5E3-A440D9E0FE81">
+    
+    <Package InstallerVersion="301" 
+             Compressed="yes" 
+             InstallScope="perMachine" 
+             Platform="x64" 
+             Description="QuickMD Markdown Reader" 
+             Comments="Made by Antigravity : Gemini 3.8 Flash and YoRHa2N" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    
+    <MediaTemplate EmbedCab="yes" />
+
+    <!-- Application Icon -->
+    <Icon Id="AppIcon" SourceFile="assets\icons\app_icon.ico" />
+    <Property Id="ARPPRODUCTICON" Value="AppIcon" />
+    <Property Id="ARPHELPLINK" Value="https://antigravity.local" />
+    <Property Id="ARPURLINFOABOUT" Value="https://antigravity.local" />
+
+    <!-- Directory Chooser Configuration -->
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <WixVariable Id="WixUILicenseRtf" Value="installer\license.rtf" />
+
+    <!-- Directory Structure -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <!-- 64-bit Program Files default -->
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="INSTALLFOLDER" Name="QuickMD" />
+      </Directory>
+      
+      <!-- Start Menu Programs Folder -->
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="QuickMD" />
+      </Directory>
+
+      <!-- Desktop Folder for Shortcut -->
+      <Directory Id="DesktopFolder" Name="Desktop" />
+    </Directory>
+
+    <!-- Component: Main Executable, Runtime DLL & Registry Associations -->
+    <DirectoryRef Id="INSTALLFOLDER">
+      <Component Id="MainExecutable" Guid="3E4671F8-69DE-4581-9952-474CDA102871" Win64="yes">
+        <File Id="QuickMDExe" 
+              Source="target\release\QuickMD.exe" 
+              KeyPath="yes" />
+        <File Id="WebView2LoaderDll" 
+              Source="assets\dll\WebView2Loader.dll" />
+
+        <!-- File Associations: .md and .markdown -->
+        <RegistryValue Root="HKCR" Key=".md" Type="string" Value="QuickMD.Document" />
+        <RegistryValue Root="HKCR" Key=".md" Name="Content Type" Type="string" Value="text/markdown" />
+        <RegistryValue Root="HKCR" Key=".markdown" Type="string" Value="QuickMD.Document" />
+        <RegistryValue Root="HKCR" Key=".markdown" Name="Content Type" Type="string" Value="text/markdown" />
+
+        <!-- Document Type Handler -->
+        <RegistryValue Root="HKCR" Key="QuickMD.Document" Type="string" Value="Markdown Document" />
+        <RegistryValue Root="HKCR" Key="QuickMD.Document\DefaultIcon" Type="string" Value="[INSTALLFOLDER]QuickMD.exe,0" />
+        <RegistryValue Root="HKCR" Key="QuickMD.Document\shell\open" Type="string" Value="Open with QuickMD" />
+        <RegistryValue Root="HKCR" Key="QuickMD.Document\shell\open\command" Type="string" Value="&quot;[INSTALLFOLDER]QuickMD.exe&quot; &quot;%1&quot;" />
+
+        <!-- Right-Click Context Menu on Any File -->
+        <RegistryValue Root="HKCR" Key="*\shell\OpenWithQuickMD" Type="string" Value="Open with QuickMD" />
+        <RegistryValue Root="HKCR" Key="*\shell\OpenWithQuickMD" Name="Icon" Type="string" Value="[INSTALLFOLDER]QuickMD.exe,0" />
+        <RegistryValue Root="HKCR" Key="*\shell\OpenWithQuickMD\command" Type="string" Value="&quot;[INSTALLFOLDER]QuickMD.exe&quot; &quot;%1&quot;" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- Component: Start Menu Shortcut -->
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="73682970-13D9-4B52-8716-1936D990F623">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+                  Name="QuickMD"
+                  Description="QuickMD Markdown Reader"
+                  Target="[INSTALLFOLDER]QuickMD.exe"
+                  WorkingDirectory="INSTALLFOLDER"
+                  Icon="AppIcon" />
+        <RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="Software\QuickMD" Name="installed_startmenu" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- Component: Desktop Shortcut (ทางลัดหน้าจอหลัก) -->
+    <DirectoryRef Id="DesktopFolder">
+      <Component Id="DesktopShortcutComponent" Guid="A7B9B496-5E24-4B07-88C8-7DE4058FF48B">
+        <Shortcut Id="ApplicationDesktopShortcut"
+                  Name="QuickMD"
+                  Description="QuickMD Markdown Reader"
+                  Target="[INSTALLFOLDER]QuickMD.exe"
+                  WorkingDirectory="INSTALLFOLDER"
+                  Icon="AppIcon" />
+        <RegistryValue Root="HKCU" Key="Software\QuickMD" Name="installed_desktop" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- Features -->
+    <Feature Id="MainApplication" Title="QuickMD Application" Level="1">
+      <ComponentRef Id="MainExecutable" />
+      <ComponentRef Id="ApplicationShortcut" />
+      <ComponentRef Id="DesktopShortcutComponent" />
+    </Feature>
+
+    <!-- UI: WixUI_InstallDir allows user to select custom installation folder -->
+    <UIRef Id="WixUI_InstallDir" />
+    <UIRef Id="WixUI_ErrorProgressText" />
+
+  </Product>
+</Wix>

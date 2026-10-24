@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' file:; script-src 'self' file:; style-src 'self' 'unsafe-inline' file:; img-src 'self' file: data: https: http:; font-src 'self' file:; object-src 'none'; frame-src 'none';">
+  <title>QuickMD</title>
+
+  <!-- Inline Critical Paint Style (Zero White Flash) -->
+  <style>
+    html, body { background-color: #0d1117; color: #e6edf3; margin: 0; padding: 0; }
+    body.theme-light { background-color: #ffffff; color: #1f2328; }
+    body.theme-tokyo-night { background-color: #1a1b26; color: #c0caf5; }
+    body.theme-sepia { background-color: #fbf0d9; color: #433422; }
+    body.theme-oled { background-color: #000000; color: #f0f6fc; }
+  </style>
+
+  <!-- Local Fonts & Styles -->
+  <link rel="stylesheet" href="../css/fonts.css">
+  <link rel="stylesheet" href="../css/katex.min.css">
+  <link rel="stylesheet" id="highlight-theme-link" href="../css/highlight-dark.min.css">
+  <link rel="stylesheet" href="app.css">
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
+  <link rel="icon" type="image/x-icon" href="../icons/app_icon.ico">
+</head>
+<body class="theme-dark width-normal">
+
+  <div id="app-container">
+    <!-- Reading Progress Bar -->
+    <div id="reading-progress-bar"></div>
+
+    <!-- Top Header / Glassmorphism Toolbar -->
+    <header id="top-header">
+      <div class="header-left">
+        <div class="app-logo">
+          <img src="logo.svg" alt="QuickMD" class="app-brand-icon" width="20" height="20">
+          <span>QuickMD</span>
+          <span class="badge">PRO</span>
+        </div>
+        
+        <button id="btn-open-file" class="tool-btn" title="Open File (Ctrl+O)">
+          <svg data-lucide="folder-open"></svg>
+          <span>Open</span>
+        </button>
+
+        <button id="btn-toggle-sidebar" class="tool-btn icon-only" title="Toggle Outline (Ctrl+T)">
+          <svg data-lucide="list-tree"></svg>
+        </button>
+
+        <button id="btn-search" class="tool-btn icon-only" title="Search in Document (Ctrl+F)">
+          <svg data-lucide="search"></svg>
+        </button>
+      </div>
+
+      <div class="header-center">
+        <div class="file-breadcrumbs">
+          <span id="breadcrumb-dir" class="dir-name">No file opened</span>
+          <span id="breadcrumb-separator" style="display:none;">/</span>
+          <span id="breadcrumb-file" class="active-filename"></span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <button id="btn-info" class="tool-btn icon-only" title="About QuickMD">
+          <svg data-lucide="info"></svg>
+        </button>
+
+        <button id="btn-stats" class="tool-btn icon-only" title="Document Statistics (Ctrl+I)">
+          <svg data-lucide="bar-chart-2"></svg>
+        </button>
+
+        <button id="btn-width" class="tool-btn icon-only" title="Reading Width">
+          <svg data-lucide="maximize-2"></svg>
+        </button>
+
+        <button id="btn-theme" class="tool-btn icon-only" title="Change Theme (Ctrl+Shift+T)">
+          <svg data-lucide="moon"></svg>
+        </button>
+
+        <div class="divider"></div>
+
+        <button id="btn-zoom-out" class="tool-btn icon-only" title="Zoom Out (Ctrl+-)">
+          <svg data-lucide="zoom-out"></svg>
+        </button>
+
+        <button id="btn-zoom-reset" class="tool-btn" style="padding: 0 4px; font-size: 11px;" title="Reset Zoom (Ctrl+0)">
+          <span id="zoom-label">100%</span>
+        </button>
+
+        <button id="btn-zoom-in" class="tool-btn icon-only" title="Zoom In (Ctrl+=)">
+          <svg data-lucide="zoom-in"></svg>
+        </button>
+
+        <div class="divider"></div>
+
+        <button id="btn-windows-assoc" class="tool-btn icon-only" title="Register Windows Context Menu & Default App" style="display: none;">
+          <svg data-lucide="sparkles"></svg>
+        </button>
+
+        <button id="btn-copy-raw" class="tool-btn icon-only" title="Copy Raw Markdown">
+          <svg data-lucide="copy"></svg>
+        </button>
+
+        <button id="btn-print" class="tool-btn icon-only" title="Print / Export PDF (Ctrl+P)">
+          <svg data-lucide="printer"></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Full-Window Drag & Drop Overlay -->
+    <div id="drop-overlay" class="hidden">
+      <div class="drop-overlay-box">
+        <svg data-lucide="file-up" width="48" height="48"></svg>
+        <div style="font-size: 18px; font-weight: 700; margin-top: 12px;">Drop Markdown File to Open</div>
+        <div style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Supports .md, .markdown, .mdown, .txt</div>
+      </div>
+    </div>
+
+    <!-- Workspace (Sidebar + Main Content) -->
+    <div id="workspace">
+      <!-- Outline Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-header">
+          <span>Outline</span>
+          <span id="outline-count" style="font-size: 10px; color: var(--text-muted);">0 Headings</span>
+        </div>
+        <div class="sidebar-content">
+          <ul id="toc-container" class="toc-list">
+            <!-- Dynamically populated TOC items -->
+          </ul>
+
+          <div class="recent-section-title">Recent Files</div>
+          <div id="recent-files-list">
+            <!-- Dynamically populated recent files -->
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content Scroller -->
+      <main id="content-scroller">
+        <!-- Welcome / Dropzone Screen (Displayed when no file loaded) -->
+        <div id="welcome-screen">
+          <div class="welcome-hero-header">
+            <img src="logo.svg" alt="QuickMD Logo" class="welcome-hero-logo" width="76" height="76">
+            <h1 class="welcome-app-name">QuickMD</h1>
+            <p class="welcome-app-tagline">High Performance Markdown Reader</p>
+          </div>
+
+          <div id="dropzone" class="welcome-drop-box">
+            <svg data-lucide="file-up"></svg>
+            <div class="welcome-title">Drag & Drop your Markdown file here</div>
+            <div class="welcome-subtitle">Or click below to browse your computer (.md, .markdown, .txt)</div>
+            <button id="btn-welcome-open" class="welcome-btn">
+              <svg data-lucide="folder-open" width="16" height="16"></svg>
+              <span>Choose File</span>
+            </button>
+          </div>
+
+          <!-- Windows Integration Card (Hidden by default; shown only if not registered) -->
+          <div class="windows-integration-banner" id="windows-assoc-banner" style="display: none;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <svg data-lucide="check-circle-2" width="20" height="20" style="color: var(--accent-color);"></svg>
+              <div style="text-align: left;">
+                <div style="font-weight: 600; font-size: 13px; color: var(--text-primary);">Windows Integration (Right-Click & Default App)</div>
+                <div style="font-size: 12px; color: var(--text-secondary);">Set QuickMD as default reader and enable "Open with QuickMD" context menu</div>
+              </div>
+            </div>
+            <button id="btn-setup-windows" class="tool-btn" style="background: var(--bg-tertiary); border: 1px solid var(--border-color); font-weight: 600;">
+              <span>Set as Default</span>
+            </button>
+          </div>
+
+          <div class="shortcuts-grid">
+            <div class="shortcut-card">
+              <span>Open File</span>
+              <kbd>Ctrl + O</kbd>
+            </div>
+            <div class="shortcut-card">
+              <span>Find in Text</span>
+              <kbd>Ctrl + F</kbd>
+            </div>
+            <div class="shortcut-card">
+              <span>Toggle Outline</span>
+              <kbd>Ctrl + T</kbd>
+            </div>
+            <div class="shortcut-card">
+              <span>Cycle Theme</span>
+              <kbd>Ctrl + Shift + T</kbd>
+            </div>
+            <div class="shortcut-card">
+              <span>Zoom In / Out</span>
+              <div><kbd>Ctrl +</kbd> <kbd>Ctrl -</kbd></div>
+            </div>
+            <div class="shortcut-card">
+              <span>Print / PDF</span>
+              <kbd>Ctrl + P</kbd>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rendered Article -->
+        <article id="markdown-article" style="display: none;">
+          <!-- Frontmatter Metadata Card (if present) -->
+          <div id="frontmatter-container" style="display: none;"></div>
+          <!-- Parsed Markdown HTML Body -->
+          <div id="article-body"></div>
+        </article>
+      </main>
+    </div>
+
+    <!-- Floating Search Bar (Ctrl+F) -->
+    <div id="search-modal" class="hidden">
+      <input type="text" id="search-input" placeholder="Search in document..." autocomplete="off">
+      <span id="search-count" class="search-count">0/0</span>
+      <button id="btn-search-prev" class="tool-btn icon-only" title="Previous Match (Shift+Enter)">
+        <svg data-lucide="chevron-up"></svg>
+      </button>
+      <button id="btn-search-next" class="tool-btn icon-only" title="Next Match (Enter)">
+        <svg data-lucide="chevron-down"></svg>
+      </button>
+      <button id="btn-search-close" class="tool-btn icon-only" title="Close Search (Esc)">
+        <svg data-lucide="x"></svg>
+      </button>
+    </div>
+
+    <!-- Stats Modal (Ctrl+I) -->
+    <div id="stats-modal-overlay" class="hidden">
+      <div class="stats-dialog">
+        <div class="stats-title">
+          <span>Document Statistics</span>
+          <button id="btn-stats-close" class="tool-btn icon-only">
+            <svg data-lucide="x"></svg>
+          </button>
+        </div>
+        <div class="stats-grid">
+          <div class="stats-item">
+            <div id="stat-words" class="stats-item-num">0</div>
+            <div class="stats-item-label">Total Words</div>
+          </div>
+          <div class="stats-item">
+            <div id="stat-readtime" class="stats-item-num">0 min</div>
+            <div class="stats-item-label">Read Time</div>
+          </div>
+          <div class="stats-item">
+            <div id="stat-chars" class="stats-item-num">0</div>
+            <div class="stats-item-label">Characters</div>
+          </div>
+          <div class="stats-item">
+            <div id="stat-lines" class="stats-item-num">0</div>
+            <div class="stats-item-label">Lines</div>
+          </div>
+          <div class="stats-item">
+            <div id="stat-headings" class="stats-item-num">0</div>
+            <div class="stats-item-label">Headings</div>
+          </div>
+          <div class="stats-item">
+            <div id="stat-codeblocks" class="stats-item-num">0</div>
+            <div class="stats-item-label">Code Blocks</div>
+          </div>
+        </div>
+        <div class="stats-credits">
+          <svg data-lucide="sparkles" width="13" height="13"></svg>
+          <span>Made by <strong>Antigravity : Gemini 3.8 Flash</strong> and <strong>YoRHa2N</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- About Modal -->
+    <div id="about-modal-overlay" class="hidden">
+      <div class="stats-dialog" style="text-align: center; max-width: 380px;">
+        <div class="stats-title" style="justify-content: flex-end; margin-bottom: 0;">
+          <button id="btn-about-close" class="tool-btn icon-only">
+            <svg data-lucide="x"></svg>
+          </button>
+        </div>
+        <div style="margin: -6px 0 16px 0;">
+          <img src="logo.svg" alt="QuickMD" width="56" height="56" style="border-radius: 14px; filter: drop-shadow(0 6px 16px rgba(99,102,241,0.35));">
+          <div style="font-size: 20px; font-weight: 800; color: var(--text-primary); margin-top: 8px;">QuickMD</div>
+          <div style="font-size: 12px; color: var(--text-muted);">Version 2.0.0 (Native Rust + Wry)</div>
+        </div>
+        <div style="background: var(--bg-tertiary); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 14px; margin-bottom: 16px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+          <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">Created &amp; Authored by</div>
+          <div style="color: var(--accent-color); font-weight: 600;">Antigravity : Gemini 3.8 Flash</div>
+          <div style="font-size: 12px; color: var(--text-muted); margin: 2px 0;">&amp;</div>
+          <div style="color: var(--text-primary); font-weight: 700;">YoRHa2N</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lightbox Overlay -->
+    <div id="lightbox-overlay" class="hidden">
+      <img id="lightbox-img" src="" alt="Enlarged Image">
+    </div>
+
+    <!-- Bottom Status Bar -->
+    <footer id="bottom-status">
+      <div class="status-left">
+        <div class="status-item">
+          <span id="status-words">0 words</span>
+        </div>
+        <div class="status-item">
+          <span id="status-readtime">0 min read</span>
+        </div>
+      </div>
+      <div class="status-right">
+        <div class="status-item">
+          <span id="status-size">0 KB</span>
+        </div>
+        <div class="status-item">
+          <span id="status-encoding">UTF-8</span>
+        </div>
+        <div class="status-item">
+          <span id="status-mtime"></span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Fallback Hidden File Input for Browser / Native Bridge Failover -->
+  <input type="file" id="fallback-file-input" accept=".md,.markdown,.mdown,.mkdn,.txt" style="display: none;">
+
+  <!-- Local Script Dependencies -->
+  <script src="../js/lucide.min.js"></script>
+  <script src="../js/marked.min.js"></script>
+  <script src="../js/katex.min.js"></script>
+  <script src="../js/auto-render.min.js"></script>
+  <script src="../js/highlight.min.js"></script>
+  <script src="../js/js-yaml.min.js"></script>
+  <script defer src="../js/mermaid.min.js"></script>
+  
+  <!-- Application Client Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
