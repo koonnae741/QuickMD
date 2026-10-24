@@ -51,7 +51,7 @@
 
 ## The Solution: What is QuickMD?
 
-**QuickMD** is a standalone, lightweight Markdown reader engineered from the ground up in **100% Native Rust** for Windows 10 and 11. It has one singular mission: **to be the fastest, lightest, most beautiful, and most secure document reader in existence.**
+**QuickMD** is a standalone, lightweight Markdown reader powered by a high-performance **Rust core (Tao + Wry)** paired with a modern sandboxed **WebView2** rendering engine for Windows 10 and 11. It has one singular mission: **to be the fastest, lightest, most beautiful, and most secure document reader in existence.**
 
 No IDE bootup. No browser windows. No internet connection required. Simply double-click any `.md` file, and your formatted document appears in front of your eyes in milliseconds.
 
@@ -107,7 +107,7 @@ Switch instantly with the shortcut `Ctrl + Shift + T`:
 
 ## Head-to-Head Comparison Matrix
 
-| Feature | QuickMD (Rust) | VS Code | Obsidian | Typora | Notepad |
+| Feature | QuickMD (Rust Core) | VS Code | Obsidian | Typora | Notepad |
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | **Startup** | **< 15 ms** | ~3–5 sec | ~1–2 sec | ~1–2 sec | < 50 ms |
 | **RAM** | **~25 MB** | ~500 MB | ~200 MB | ~180 MB | ~15 MB |
@@ -265,7 +265,7 @@ light.exe -nologo -ext WixUIExtension -sval -out installer\QuickMD-2.0.0-windows
 
 ## ทางออก (The Solution): QuickMD คือใคร และเข้ามาแก้อะไร?
 
-**QuickMD** คือโปรแกรมเปิดอ่านไฟล์ Markdown สแตนด์อโลนสำหรับ Windows 10/11 ที่ถูกเขียนขึ้นใหม่ด้วยภาษา **Rust 100%** ร่วมกับเอนจินประมวลผลรุ่นใหม่ของระบบปฏิบัติการ โดยมีเป้าหมายเดียวคือ: **"ต้องเร็วที่สุด เบาที่สุด สวยงามที่สุด และปลอดภัยที่สุดสำหรับการอ่านเอกสาร"**
+**QuickMD** คือโปรแกรมเปิดอ่านไฟล์ Markdown สแตนด์อโลนสำหรับ Windows 10/11 ที่ขับเคลื่อนด้วยแกนหลักภาษา **Rust (Tao + Wry)** ทำงานร่วมกับเอนจินเรนเดอร์ **WebView2** แบบ Sandboxed โดยมีเป้าหมายเดียวคือ: **"ต้องเร็วที่สุด เบาที่สุด สวยงามที่สุด และปลอดภัยที่สุดสำหรับการอ่านเอกสาร"**
 
 ไม่ต้องเปิด IDE, ไม่ต้องเปิดเบราว์เซอร์, ไม่ต้องต่ออินเทอร์เน็ต แค่ดับเบิลคลิกไฟล์ .md ทุกอย่างจะปรากฏขึ้นตรงหน้าในเวลาไม่ถึงกระพริบตา
 
@@ -285,7 +285,7 @@ light.exe -nologo -ext WixUIExtension -sval -out installer\QuickMD-2.0.0-windows
 
 ## ตารางเปรียบเทียบเชิงสมรรถนะ (Head-to-Head Comparison)
 
-| คุณสมบัติ | QuickMD (Rust) | VS Code | Obsidian | Typora | Notepad |
+| คุณสมบัติ | QuickMD (Rust Core) | VS Code | Obsidian | Typora | Notepad |
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | **ความเร็วเปิด** | **< 15 ms** | ~3–5 วินาที | ~1–2 วินาที | ~1–2 วินาที | < 50 ms |
 | **กินแรม (RAM)** | **~25 MB** | ~500 MB | ~200 MB | ~180 MB | ~15 MB |
