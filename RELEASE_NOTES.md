@@ -1,6 +1,6 @@
 ## QuickMD v2.0.0 — Modern High-Performance Markdown Reader for Windows
 
-![QuickMD Hero](https://github.com/koonnae741/QuickMD/blob/main/docs/images/quickmd-hero.png?raw=true)
+![QuickMD Hero](https://raw.githubusercontent.com/koonnae741/QuickMD/main/docs/images/quickmd-hero.png)
 
 ### ⚡ Key Highlights
 - **Sub-15ms Startup Latency**: Pure native Rust (Tao + Wry), no Electron/Node runtime overhead.
@@ -12,6 +12,6 @@
 ---
 
 ### 📦 Package Integrity Verification
-- **Asset:** `QuickMD-2.0.0-windows-x64.msi`
-- **Size:** `2,633,728 bytes` (2.51 MB)
+- **Official Asset:** `QuickMD-2.0.0-windows-x64.msi`
+- **File Size:** `2,633,728 bytes` (2.51 MB)
 - **SHA-256 Checksum:** `5ee9c414d83e10f366b5dcb97cc85f80e57cb11770cb9a793e01ab77506861c4`

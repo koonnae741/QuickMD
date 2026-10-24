@@ -20,7 +20,9 @@
 
 ---
 
-![QuickMD Interface Preview](docs/images/quickmd-hero.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/koonnae741/QuickMD/main/docs/images/quickmd-hero.png" alt="QuickMD Interface Preview" width="100%">
+</p>
 
 <p align="center">
   <em>QuickMD v2.0.0 rendering technical architecture documentation in Tokyo Night theme with KaTeX math, Mermaid diagrams, and real-time outline sidebar.</em>
@@ -44,7 +46,9 @@ Modern Markdown readers have grown bloated. Most popular viewers run on Electron
 
 ## 📸 Interface & Theme Showcase
 
-![QuickMD Theme and Feature Showcase](docs/images/quickmd-showcase-grid.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/koonnae741/QuickMD/main/docs/images/quickmd-showcase-grid.png" alt="QuickMD Theme and Feature Showcase" width="100%">
+</p>
 
 | Theme | Best For | Description |
 | :--- | :--- | :--- |
