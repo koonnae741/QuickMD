@@ -1,5 +1,12 @@
-[build]
+[target.x86_64-pc-windows-gnu]
 rustflags = [
-    "--remap-path-prefix", "C:\\Users\\User=~",
-    "--remap-path-prefix", "C:\\Antigravity=/src",
+    "-C", "link-self-contained=no",
+    "--remap-path-prefix=C:\\Users\\User=~",
+    "--remap-path-prefix=C:/Users/User=~",
+    "--remap-path-prefix=c:\\users\\user=~",
+    "--remap-path-prefix=c:/users/user=~",
+    "--remap-path-prefix=C:\\Antigravity=/src",
+    "--remap-path-prefix=C:/Antigravity=/src",
+    "--remap-path-prefix=c:\\antigravity=/src",
+    "--remap-path-prefix=c:/antigravity=/src",
 ]
