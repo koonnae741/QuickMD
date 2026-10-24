@@ -1,0 +1,28 @@
+PackageIdentifier: koonnae741.QuickMD
+PackageVersion: 2.0.0
+PackageLocale: en-US
+Publisher: YoRHa2N
+PublisherUrl: https://github.com/koonnae741
+PublisherSupportUrl: https://github.com/koonnae741/QuickMD/issues
+Author: YoRHa2N & Antigravity
+PackageName: QuickMD
+PackageUrl: https://github.com/koonnae741/QuickMD
+License: MIT
+LicenseUrl: https://github.com/koonnae741/QuickMD/blob/main/LICENSE
+Copyright: Copyright (c) 2026 YoRHa2N & Antigravity
+ShortDescription: Ultra-fast, lightweight native Markdown reader for Windows (<15ms, ~25MB RAM, offline KaTeX & Mermaid). Powered by Rust + WebView2.
+Description: |-
+  QuickMD is a standalone, lightweight Markdown reader powered by a high-performance Rust core (Tao + Wry) paired with a modern sandboxed WebView2 rendering engine for Windows 10 and 11.
+  Features instant sub-15ms cold start, ~25MB memory footprint, 100% offline air-gapped security, KaTeX math rendering, live Mermaid diagrams, and 5 eye-strain reduction themes.
+Tags:
+  - markdown
+  - markdown-reader
+  - rust
+  - windows
+  - katex
+  - mermaid
+  - offline
+  - fast
+  - viewer
+ManifestType: defaultLocale
+ManifestVersion: 1.6.0

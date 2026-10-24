@@ -180,7 +180,16 @@ graph LR
 
 ## Installation & Download
 
-### Method 1: Official Windows Installer (Recommended)
+### Method 1: Windows Package Manager (WinGet)
+
+Install directly from PowerShell or Command Prompt using the validated WinGet manifest:
+```cmd
+winget install --manifest installer/winget
+```
+
+---
+
+### Method 2: Official Windows Installer (Recommended)
 
 1. Download **[QuickMD-2.0.0-windows-x64.msi](https://github.com/koonnae741/QuickMD/releases/download/v2.0.0/QuickMD-2.0.0-windows-x64.msi)** from the [Releases](https://github.com/koonnae741/QuickMD/releases) page.
 2. Run the installer. It will automatically:
@@ -197,7 +206,7 @@ Get-FileHash -Algorithm SHA256 "QuickMD-2.0.0-windows-x64.msi"
 
 ---
 
-### Method 2: Command Line Usage
+### Method 3: Command Line Usage
 
 Open any document directly from PowerShell or Command Prompt:
 ```cmd
@@ -307,9 +316,10 @@ light.exe -nologo -ext WixUIExtension -sval -out installer\QuickMD-2.0.0-windows
 
 ---
 
-## สรุปการติดตั้ง Windows MSI
+## ช่องทางการติดตั้ง (Installation)
 
-- **ไฟล์ติดตั้งมาตรฐาน:** `QuickMD-2.0.0-windows-x64.msi` (ขนาดเพียง 2.5 MB)
+- **ผ่านคำสั่ง WinGet:** `winget install --manifest installer/winget`
+- **ผ่านไฟล์ติดตั้ง MSI:** `QuickMD-2.0.0-windows-x64.msi` (ขนาดเพียง 2.5 MB)
 - **ระบบอัตโนมัติ:** ผูกสิทธิ์เปิดไฟล์ `.md` และเพิ่มเมนูคลิกขวา "Open with QuickMD" ใน Windows Explorer ให้อัตโนมัติ ถอนการติดตั้งได้สะอาดหมดจดผ่าน Windows Settings
 
 ---
