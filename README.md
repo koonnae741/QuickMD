@@ -1,7 +1,7 @@
 # QuickMD — High-Performance Native Markdown Reader for Windows
 
 <p align="center">
-  <img src="assets/icons/logo.svg" alt="QuickMD Logo" width="112" height="112">
+  <img src="assets/icons/logo_256.png" alt="QuickMD Logo" width="112" height="112">
 </p>
 
 <p align="center">
@@ -20,8 +20,9 @@
 
 ---
 
+![QuickMD Interface Preview](docs/images/quickmd-hero.png)
+
 <p align="center">
-  <img src="docs/images/quickmd-hero.png" alt="QuickMD Interface Preview" width="100%">
   <em>QuickMD v2.0.0 rendering technical architecture documentation in Tokyo Night theme with KaTeX math, Mermaid diagrams, and real-time outline sidebar.</em>
 </p>
 
@@ -43,9 +44,7 @@ Modern Markdown readers have grown bloated. Most popular viewers run on Electron
 
 ## 📸 Interface & Theme Showcase
 
-<p align="center">
-  <img src="docs/images/quickmd-showcase-grid.png" alt="QuickMD Theme and Feature Showcase" width="100%">
-</p>
+![QuickMD Theme and Feature Showcase](docs/images/quickmd-showcase-grid.png)
 
 | Theme | Best For | Description |
 | :--- | :--- | :--- |
