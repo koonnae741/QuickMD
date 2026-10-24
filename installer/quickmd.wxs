@@ -4,7 +4,7 @@
            Name="QuickMD" 
            Language="1033" 
            Version="2.0.0" 
-           Manufacturer="YoRHa2N" 
+           Manufacturer="koonnae741" 
            UpgradeCode="4C7A5832-849F-491F-B5E3-A440D9E0FE81">
     
     <Package InstallerVersion="301" 
@@ -12,7 +12,7 @@
              InstallScope="perMachine" 
              Platform="x64" 
              Description="QuickMD Markdown Reader" 
-             Comments="Made by Antigravity : Gemini 3.8 Flash and YoRHa2N" />
+             Comments="QuickMD Markdown Reader by koonnae741" />
 
     <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
     
@@ -21,8 +21,8 @@
     <!-- Application Icon -->
     <Icon Id="AppIcon" SourceFile="assets\icons\app_icon.ico" />
     <Property Id="ARPPRODUCTICON" Value="AppIcon" />
-    <Property Id="ARPHELPLINK" Value="https://antigravity.local" />
-    <Property Id="ARPURLINFOABOUT" Value="https://antigravity.local" />
+    <Property Id="ARPHELPLINK" Value="https://github.com/koonnae741/QuickMD" />
+    <Property Id="ARPURLINFOABOUT" Value="https://github.com/koonnae741/QuickMD" />
 
     <!-- Directory Chooser Configuration -->
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />

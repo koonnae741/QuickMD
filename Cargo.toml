@@ -2,8 +2,8 @@
 name = "quickmd"
 version = "2.0.0"
 edition = "2024"
-authors = ["Antigravity : Gemini 3.8 Flash", "YoRHa2N"]
-description = "Made by Antigravity : Gemini 3.8 Flash and YoRHa2N"
+authors = ["koonnae741"]
+description = "QuickMD - High Performance Lightweight Markdown Reader by koonnae741"
 
 [[bin]]
 name = "QuickMD"

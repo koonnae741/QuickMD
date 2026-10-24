@@ -55,7 +55,7 @@
 
 No IDE bootup. No browser windows. No internet connection required. Simply double-click any `.md` file, and your formatted document appears in front of your eyes in milliseconds.
 
-> **Authors & Credits:** Created by **YoRHa2N** and **Antigravity : Gemini 3.8 Flash**
+> **Author & Credits:** Created by **koonnae741**
 
 ---
 
@@ -328,4 +328,4 @@ light.exe -nologo -ext WixUIExtension -sval -out installer\QuickMD-2.0.0-windows
 
 QuickMD is open-source software licensed under the **[MIT License](LICENSE)**.
 
-Copyright (c) 2026 **YoRHa2N** & **Antigravity**. All rights reserved.
+Copyright (c) 2026 **koonnae741**. All rights reserved.

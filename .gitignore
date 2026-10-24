@@ -20,6 +20,9 @@ installer/*.wixpdb
 *.swp
 *.swo
 
+# Media & Video Generation artifacts
+docs/video/
+
 # Operating System Files
 Thumbs.db
 .DS_Store

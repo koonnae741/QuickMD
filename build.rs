@@ -21,15 +21,15 @@ BEGIN
     BEGIN
         BLOCK "040904b0"
         BEGIN
-            VALUE "CompanyName", "Antigravity : Gemini 3.8 Flash & YoRHa2N\0"
+            VALUE "CompanyName", "koonnae741\0"
             VALUE "FileDescription", "QuickMD Markdown Reader\0"
             VALUE "FileVersion", "2.0.0.0\0"
             VALUE "InternalName", "QuickMD\0"
-            VALUE "LegalCopyright", "Made by Antigravity : Gemini 3.8 Flash and YoRHa2N\0"
+            VALUE "LegalCopyright", "Copyright (c) 2026 koonnae741\0"
             VALUE "OriginalFilename", "QuickMD.exe\0"
             VALUE "ProductName", "QuickMD\0"
             VALUE "ProductVersion", "2.0.0.0\0"
-            VALUE "Comments", "Made by Antigravity : Gemini 3.8 Flash and YoRHa2N\0"
+            VALUE "Comments", "Made by koonnae741\0"
         END
     END
     BLOCK "VarFileInfo"
