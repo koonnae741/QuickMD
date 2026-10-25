@@ -15,7 +15,7 @@ FileExtensions:
 Installers:
   - Architecture: x64
     InstallerUrl: https://github.com/koonnae741/QuickMD/releases/download/v2.0.0/QuickMD-2.0.0-windows-x64.msi
-    InstallerSha256: 5EE9C414D83E10F366B5DCB97CC85F80E57CB11770CB9A793E01AB77506861C4
+    InstallerSha256: DB75B04F05EE5974809DDF71C56E54A0BDA057ABB93CE61E5B37C7572C267F1C
     ProductCode: '{73F8C590-528C-4FB8-B62D-7A09BB36AA76}'
 ManifestType: installer
 ManifestVersion: 1.6.0
