@@ -1,0 +1,22 @@
+PackageIdentifier: koonnae741.QuickMD
+PackageVersion: 3.0.0
+InstallerType: msi
+InstallModes:
+  - interactive
+  - silent
+  - silentWithProgress
+UpgradeBehavior: install
+Commands:
+  - QuickMD
+FileExtensions:
+  - md
+  - markdown
+  - mdown
+  - mkd
+Installers:
+  - Architecture: x64
+    InstallerUrl: https://github.com/koonnae741/QuickMD/releases/download/v3.0.0/QuickMD-3.0.0-windows-x64.msi
+    InstallerSha256: C0CDC1F42242537E7FDBF5A7479E6FB85FAE0E197F966586E3C4475BE0522E49
+    ProductCode: '{33E8F984-E338-4B6F-A668-8371B0BB565C}'
+ManifestType: installer
+ManifestVersion: 1.6.0

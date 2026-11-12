@@ -1,0 +1,46 @@
+[package]
+name = "quickmd-v3"
+version = "3.0.0"
+edition = "2024"
+authors = ["koonnae741"]
+description = "QuickMD 3.0 - High Performance Native Markdown Reader with Pure Rust Math & Mermaid by koonnae741"
+
+[lib]
+name = "quickmd_lib"
+path = "src/lib.rs"
+
+[[bin]]
+name = "QuickMD3"
+path = "src/main.rs"
+
+[dependencies]
+tao = "0.37.1"
+softbuffer = "0.4.6"
+tiny-skia = "0.11"
+cosmic-text = "0.12"
+doc_layout = { path = "crates/doc_layout" }
+native_render = { path = "crates/native_render" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+winreg = "0.56.0"
+encoding_rs = "0.8"
+rfd = "0.17.2"
+arboard = "3.6.1"
+image = { version = "0.25", default-features = false, features = ["png", "jpeg", "webp", "gif"] }
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.59", features = ["Win32_Foundation", "Win32_Graphics_Dwm"] }
+
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+
+[workspace]
+members = [
+    "crates/doc_layout",
+    "crates/native_render",
+]

@@ -1,0 +1,28 @@
+PackageIdentifier: koonnae741.QuickMD
+PackageVersion: 3.0.0
+PackageLocale: en-US
+Publisher: koonnae741
+PublisherUrl: https://github.com/koonnae741
+PublisherSupportUrl: https://github.com/koonnae741/QuickMD/issues
+Author: koonnae741
+PackageName: QuickMD
+PackageUrl: https://github.com/koonnae741/QuickMD
+License: MIT
+LicenseUrl: https://github.com/koonnae741/QuickMD/blob/main/LICENSE
+Copyright: Copyright (c) 2026 koonnae741
+ShortDescription: 100% Pure Native Rust Markdown reader for Windows (144Hz GPU-free tiny-skia & cosmic-text engine, offline Knuth TeX math & Sugiyama Mermaid diagrams, zero WebView2).
+Description: |-
+  QuickMD 3.0 is a standalone, 100% Pure Native Rust Markdown reader powered by Tao, Softbuffer, tiny-skia, and cosmic-text for Windows 10 and 11 with zero WebView2 or browser runtime dependencies.
+  Features instant cold boot, Two-Tier Progressive Layout for massive multi-megabyte documents at 144Hz, 100% offline air-gapped security, native Knuth TeX math typesetting, native Sugiyama Mermaid diagrams with interactive Pan-Zoom Lightbox, flawless ICU Thai dictionary segmentation, and 5 handcrafted reading themes.
+Tags:
+  - markdown
+  - markdown-reader
+  - rust
+  - windows
+  - latex
+  - mermaid
+  - offline
+  - fast
+  - viewer
+ManifestType: defaultLocale
+ManifestVersion: 1.6.0
